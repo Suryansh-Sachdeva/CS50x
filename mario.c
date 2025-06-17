@@ -7,7 +7,8 @@ int main() {
     printf("Enter number of rows: ");
     scanf("%d", &rows);
     // Outer loop for each row
-    while (rows!>0){
+    while (rows<1)
+    {
         printf("Enter number of rows: ");
         scanf("%d", &rows);
     }
