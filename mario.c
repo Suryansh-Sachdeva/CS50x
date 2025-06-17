@@ -7,6 +7,10 @@ int main() {
     printf("Enter number of rows: ");
     scanf("%d", &rows);
     // Outer loop for each row
+    while (rows!>0){
+        printf("Enter number of rows: ");
+        scanf("%d", &rows);
+    }
     if (rows>0){
         for(int i = 1; i <= rows; i++) {
             // Print spaces
