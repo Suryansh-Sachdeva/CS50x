@@ -1,56 +1,52 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <math.h>
 
-// Scrabble point values for each letter A-Z
-const int POINTS[] = {
-    1, 3, 3, 2, 1, 4, 2, 4, 1, 8,   // A-J
-    5, 1, 3, 1, 1, 3, 10, 1, 1, 1,  // K-T
-    1, 4, 4, 8, 4, 10               // U-Z
-};
+int main() {
+    char paragraph[1000];
 
-// Function to compute score for a given word
-int compute_score(const char word[]) {
-    int score = 0;
+    // Input paragraph
+    printf("Enter a paragraph:\n");
+    fgets(paragraph, sizeof(paragraph), stdin);
 
-    for (int i = 0; word[i] != '\0'; i++) {
-        if (isalpha(word[i])) {
-            // Convert letter to uppercase and calculate its index
-            int index = toupper(word[i]) - 'A';
-            score += POINTS[index];
+    int letters = 0;
+    int words = 0;
+    int sentences = 0;
+
+    for (int i = 0; paragraph[i] != '\0'; i++) {
+        if (isalpha(paragraph[i])) {
+            letters++;
+        } else if (paragraph[i] == ' ') {
+            words++;
+        } else if (paragraph[i] == '.' || paragraph[i] == '!' || paragraph[i] == '?') {
+            sentences++;
         }
     }
 
-    return score;
-}
+    // Account for last word (not followed by space)
+    words++;
 
-int main() {
-    char word1[100];
-    char word2[100];
+    // Calculate L and S
+    float L = (float) letters / words * 100;
+    float S = (float) sentences / words * 100;
 
-    // Get input from both players
-    printf("Player 1: ");
-    scanf("%99s", word1);  // Avoids buffer overflow
+    // Coleman-Liau index
+    float index = 0.0588 * L - 0.296 * S - 15.8;
+    int grade = round(index);
 
-    printf("Player 2: ");
-    scanf("%99s", word2);
+    printf("\n--- Readability Report ---\n");
+    printf("Letters: %d\n", letters);
+    printf("Words: %d\n", words);
+    printf("Sentences: %d\n", sentences);
+    printf("Grade Level: ");
 
-    // Calculate scores
-    int score1 = compute_score(word1);
-    int score2 = compute_score(word2);
-
-    // Display results
-    printf("\n--- Results ---\n");
-    printf("Player 1 Score: %d\n", score1);
-    printf("Player 2 Score: %d\n", score2);
-
-    // Determine winner
-    if (score1 > score2) {
-        printf("🎉 Player 1 wins!\n");
-    } else if (score2 > score1) {
-        printf("🎉 Player 2 wins!\n");
+    if (grade < 1) {
+        printf("Before Grade 1\n");
+    } else if (grade >= 16) {
+        printf("Grade 16+\n");
     } else {
-        printf("🤝 It's a tie!\n");
+        printf("Grade %d\n", grade);
     }
 
     return 0;
