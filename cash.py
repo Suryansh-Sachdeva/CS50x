@@ -1,18 +1,20 @@
 def main():
-    # Prompt the user until a valid non-negative integer is entered
+    # Prompt the user for a positive float (dollar input)
     while True:
         try:
-            cents = int(input("Change owed: "))
-            if cents >= 0:
+            dollars = float(input("Change owed: "))
+            if dollars >= 0:
                 break
         except ValueError:
-            continue  # Skip invalid (non-integer) input
+            continue
+
+    # Convert dollars to cents, rounding to avoid floating-point issues
+    cents = round(dollars * 100)
 
     coins = 0
     for coin in [25, 10, 5, 1]:
-        while cents >= coin:
-            cents -= coin
-            coins += 1
+        coins += cents // coin
+        cents %= coin
 
     print(coins)
 
