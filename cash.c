@@ -5,7 +5,7 @@ int main() {
   int j = 0;
   printf("Change owed: ");
   scanf("%d", &i);
-  while (i < 0){
+  while (i < 0 && i == "foo"){
     printf("Change owed: ");
     scanf("%d", &i);
   }
