@@ -9,3 +9,6 @@ Technical Features:
 Responsive Design: Basic responsiveness to fit desktops and mobile devices.
 JavaScript: Form interaction (displays thank-you alert and resets the form).
 Clean Code Structure: Easy to modify and extend (e.g., for adding reviews, gallery, reservation system, etc.).
+Purpose: To create a visually appealing, user-friendly, and functional website for a fictional restaurant called Delish Dine, showcasing its menu, philosophy, and providing an easy way for users to get in touch.
+HTML (Structure) Acts as the skeleton of the site. Semantic elements (<header>, <nav>, <section>, <footer>) are used for clarity and SEO.
+Includes: A navigation bar (<nav>) Sections: Hero, Menu, About, Contact Form for user input Footer with branding
