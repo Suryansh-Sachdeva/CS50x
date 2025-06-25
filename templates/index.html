@@ -21,11 +21,11 @@
             {% for stock in stocks %}
 
                 <tr>
-                    <td>{{ stock.symbol }}</td>
-                    <td>{{ stock.name }}</td>
-                    <td>{{ stock.shares }}</td>
                     <td>{{ stock.price | usd }}</td>
                     <td>{{ stock.total | usd }}</td>
+                    <td>{{ cash | usd }}</td>
+                    <td>{{ total | usd }}</td>
+
                     <td class="td-btn-portfolio text-center">
                         <form class="d-inline-block" action="/buy" method="post">
                             <input name="symbol" type="hidden" value="{{ stock.symbol }}"></input>
