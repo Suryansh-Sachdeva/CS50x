@@ -148,7 +148,19 @@ def login():
         rows = db.execute(
             "SELECT * FROM users WHERE username = ?", username
         )
+        if request.method == "POST":
+            username = request.form.get("username")
+            password = request.form.get("password")
 
+        if not username or not password:
+            return "Missing username or password", 400
+
+        user = db.execute("SELECT * FROM users WHERE username = ?", username)
+        if len(user) != 1 or not check_password_hash(user[0]["hash"], password):
+            return "Invalid username or password", 403
+
+        session["user_id"] = user[0]["id"]
+        return redirect("/")
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(
             rows[0]["hash"], password
