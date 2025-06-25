@@ -5,15 +5,8 @@
 {% endblock %}
 
 {% block main %}
-
-    <p class="quote">
-        A share of {{ companyName }} ({{ symbol }}) costs {{ price | usd }}.
-    </p>
-
-{% endblock %}
-
-{% block img %}
-
-    <img src="/static/stocks.jpg" class="img-thumbnail" alt="Stocks" height="510" width="510" title="Stocks">
-
+    <h1>Quoted</h1>
+    <h3>Name: {{ name }}</h3>
+    <h3>Price: {{ price }}</h3>
+    <h3>Symbol: {{ symbol }}</h3>
 {% endblock %}

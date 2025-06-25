@@ -21,34 +21,3 @@ nav .navbar-brand .green
 {
     color: #2e944b;
 }
-
-p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
-
-.mytable {
-    margin-left: 110px;
-    margin-right: 110px;
-}
-
-.note {
-    font-family: Arial, sans-serif;
-    color: #0d05f7;
-}
-
-.quote {
-    font-family: Arial, sans-serif;
-    font-size: 35px;
-    color: #05f240;
-}
-
-.error {
-    font-family: Arial, sans-serif;
-    font-size: 35px;
-    color: #ff0000;
-    text-decoration: underline;
-}

@@ -35,6 +35,7 @@
                             <li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
                             <li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
                             <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/add_cash">Add Cash</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto mt-2">
                             <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
@@ -49,27 +50,21 @@
             </div>
         </nav>
 
-        <div>
-            {% if get_flashed_messages() %}
-                <header>
-                    <div class="alert alert-primary mb-0 text-center" role="alert">
-                        {{ get_flashed_messages() | join(" ") }}
-                    </div>
-                </header>
-            {% endif %}
-            <div class="mytable">
-                <main class="container-fluid py-5 text-center">
-                    {% block main %}{% endblock %}
-                </main>
-            </div>
-            <div class="text-center">
-                {% block img %}{% endblock %}
-            </div>
-            <br><br>
-            <footer class="mb-5 small text-center text-muted">
-                Data provided by <a href="https://iexcloud.io/">IEX</a>
-            </footer>
-        </div>
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary mb-0 text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
+        <main class="container-fluid py-5 text-center">
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="mb-5 small text-center text-muted">
+            Data provided by <a href="https://iexcloud.io/">IEX</a>
+        </footer>
 
     </body>
 
