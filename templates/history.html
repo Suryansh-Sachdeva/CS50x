@@ -1,41 +1,33 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Index
+    History
 {% endblock %}
 
 {% block main %}
-
-    <table class="table table-striped text-left">
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Shares</th>
-                <th>Price</th>
-                <th>Action</th>
-                <th>Transacted</th>
-                <th>TOTAL</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for stock in stocks %}
-
+    <h2 class="card-title p-5">Transaction History</h2>
+    <div class="table-responsive" style="overflow: auto; max-height: 580px">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>{{ stock.symbol }}</td>
-                    <td>{{ stock.shares }}</td>
-                    <td>{{ stock.price | usd }}</td>
-                    <td>{{ stock.action.upper() }}</td>
-                    <td>{{ stock.timestamp }}</td>
-                    {% if '+' in stock.total %}
-                        <td class="text-success">{{ stock.total }}</td>
-                    {% else %}
-                        <td class="text-danger">{{ stock.total }}</td>
-                    {% endif %}
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Transaction date</th>
                 </tr>
-
-            {% endfor %}
-
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                {% for stock in stocks %}
+                <tr>
+                    <td>{{stock['symbol']}}</td>
+                    <td>{{stock['shares']}}</td>
+                    <td>{{stock['price']}}</td>
+                    <td>{{stock['total_price']}}</td>
+                    <td>{{stock['date_created']}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
