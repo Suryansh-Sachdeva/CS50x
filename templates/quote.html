@@ -5,12 +5,16 @@
 {% endblock %}
 
 {% block main %}
-    <h2 class="card-title p-5">Quote Share Price</h2>
     <form action="/quote" method="post">
-        <div class="d-inline-flex">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto p-2" name="symbol"
-                placeholder="Stock symbol" type="text">
-            <button class="btn btn-primary mx-3 p-2 px-4" type="submit">Get Quote</button>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Symbol" type="text">
         </div>
+        <button class="btn btn-primary" type="submit">Quote</button>
     </form>
+{% endblock %}
+
+{% block img %}
+
+    <img src="/static/wallStreet.jpg" class="img-thumbnail" alt="Wall Street" height="510" width="510" title="Wall Street">
+
 {% endblock %}

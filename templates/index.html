@@ -1,46 +1,52 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Index
+    Portfolio
 {% endblock %}
 
 {% block main %}
-    <div class="d-flex align-items-center w-100 justify-content-center">
-        <h2 class="card-title p-5 flex-grow-1 text-center" style="margin-left:120px">Stock Summary</h2>
-        <form action="/add" method="get">
-            <button class="btn btn-primary p-2 px-4" type="submit">Add Cash</button>
-        </form>
-    </div>
-    <div class="table-responsive" style="overflow: auto; max-height: 580px">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Symbol</th>
-                    <th scope="col">Shares</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">TOTAL</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for stock in stocks %}
-                <tr>
-                    <td>{{stock['symbol']}}</td>
-                    <td>{{stock['shares']}}</td>
-                    <td>{{stock['price']}}</td>
-                    <td>{{stock['total_price']}}</td>
-                </tr>
+
+    <table class="table tablestriped">
+        <thead>
+            <tr>
+                <th class="text-start">Symbol</th>
+                <th class="text-start">Name</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">TOTAL</th>
+            </tr>
+        </thead>
+       <tbody>
+
+                {% for row in portfolio %}
+                    {% if row.amount != 0 %}
+                        <tr>
+                            <td class="text-start">{{ row.symbol }}</td>
+                            <td class="text-start">{{ row.name }}</td>
+                            <td class="text-end">{{ row.amount }}</td>
+                            <td class="text-end">{{ row.price | usd }}</td>
+                            <td class="text-end">{{ row.totalPrice | usd }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td class="border-0 fw-bold" colspan="3">Cash</td>
-                    <td class="border-0">{{cash}}</td>
-                </tr>
-                <tr>
-                    <td class="border-0 fw-bold" colspan="3">TOTAL</td>
-                    <td class="border-0">{{total}}</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                <td class="border-0 text-end">{{ balance | usd }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                <td class="border-0 w-bold text-end">{{ total | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+{% endblock %}
+
+{% block img %}
+
+    <img src="/static/sell1.jpg" class="img-thumbnail" alt="Casino" height="510" width="510" title="Casino">
+
 {% endblock %}
