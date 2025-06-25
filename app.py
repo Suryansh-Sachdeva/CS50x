@@ -124,33 +124,54 @@ def history():
     return render_template("history.html", stocks=stock_data)
 
 
+# @app.route("/login", methods=["GET", "POST"])
+# def login():
+#     """Log user in"""
+
+#     # Forget any user_id
+#     session.clear()
+
+#     # User reached route via POST (as by submitting a form via POST)
+#     if request.method == "POST":
+#         # Ensure username was submitted
+#         username = request.form.get("username")
+#         password = request.form.get("password")
+
+#         if not username:
+#             return apology("must provide username")
+
+#         # Ensure password was submitted
+#         if not password:
+#             return apology("must provide password")
+
+#         # Query database for username
+#         rows = db.execute(
+#             "SELECT * FROM users WHERE username = ?", username
+#         )
+
+#         # Ensure username exists and password is correct
+#         if len(rows) != 1 or not check_password_hash(
+#             rows[0]["hash"], password
+#         ):
+#             return apology("invalid username and/or password")
+
+#         # Remember which user has logged in
+#         session["user_id"] = rows[0]["id"]
+
+#         # Redirect user to home page
+#         return redirect("/")
+
+#     # User reached route via GET (as by clicking a link or via redirect)
+#     return render_template("login.html")
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Log user in"""
-
-    # Forget any user_id
     session.clear()
 
-    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        # Ensure username was submitted
         username = request.form.get("username")
         password = request.form.get("password")
-
-        if not username:
-            return apology("must provide username")
-
-        # Ensure password was submitted
-        if not password:
-            return apology("must provide password")
-
-        # Query database for username
-        rows = db.execute(
-            "SELECT * FROM users WHERE username = ?", username
-        )
-        if request.method == "POST":
-            username = request.form.get("username")
-            password = request.form.get("password")
 
         if not username or not password:
             return "Missing username or password", 400
@@ -161,19 +182,7 @@ def login():
 
         session["user_id"] = user[0]["id"]
         return redirect("/")
-        # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(
-            rows[0]["hash"], password
-        ):
-            return apology("invalid username and/or password")
 
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
-
-        # Redirect user to home page
-        return redirect("/")
-
-    # User reached route via GET (as by clicking a link or via redirect)
     return render_template("login.html")
 
 
