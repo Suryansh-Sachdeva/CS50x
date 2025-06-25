@@ -30,26 +30,7 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    session.clear()
 
-    if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-
-        if not username or not password:
-            return "Missing username or password", 400
-
-        user = db.execute("SELECT * FROM users WHERE username = ?", username)
-        if len(user) != 1 or not check_password_hash(user[0]["hash"], password):
-            return "Invalid username or password", 403
-
-        session["user_id"] = user[0]["id"]
-        return redirect("/")
-
-    return render_template("login.html")
-#may need to remove
 @app.route("/")
 @login_required
 def index():
