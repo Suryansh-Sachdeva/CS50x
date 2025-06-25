@@ -1,36 +1,41 @@
-<!-- The 'History' Page -->
-
 {% extends "layout.html" %}
 
 {% block title %}
-    History
+    Index
 {% endblock %}
 
 {% block main %}
-    <div class="table-responsive-md">
-        <table class="table mx-auto w-50">
-            <thead>
-                <tr class="table-active">
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Symbol</th>
-                    <th scope="col">Shares</th>
-                    <th scope="col">Action</th>
-                    <th scope="col">Balance</th>
-                    <th scope="col">Transacted</th>
+
+    <table class="table table-striped text-left">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Action</th>
+                <th>Transacted</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+
+                <tr>
+                    <td>{{ stock.symbol }}</td>
+                    <td>{{ stock.shares }}</td>
+                    <td>{{ stock.price | usd }}</td>
+                    <td>{{ stock.action.upper() }}</td>
+                    <td>{{ stock.timestamp }}</td>
+                    {% if '+' in stock.total %}
+                        <td class="text-success">{{ stock.total }}</td>
+                    {% else %}
+                        <td class="text-danger">{{ stock.total }}</td>
+                    {% endif %}
                 </tr>
-            </thead>
-            <tbody>
-                {% for stock in portfolio %}
-                <tr class="table-light">
-                    <td>{{ stock["name"] }}</td>
-                    <td>{{ stock["symbol"] }}</td>
-                    <td>{{ stock["shares"] }}</td>
-                    <td>{{ stock["action"] }}</td>
-                    <td>{{ stock["balance"] }}</td>
-                    <td>{{ stock["date"] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
 {% endblock %}
